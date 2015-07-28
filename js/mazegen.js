@@ -7,7 +7,7 @@ function cell(posX, posY){
 	this.wallRight = true;
 	this.wallBottom = true;
 	
-	/*Return a list of all cells adjancent to this one where walked != false*/
+	//Return a list of all cells adjancent to this one where walked != false
 	this.possibleCells = function(){
 		var possibleCells = [];
 		if(this.posX != 0 && grid[this.posY][this.posX-1].walked == false) { possibleCells.push(grid[this.posY][this.posX-1]); } //leftX
@@ -17,7 +17,7 @@ function cell(posX, posY){
 		return possibleCells;
 	}
 	
-	/*Marks this cell as walked, chooses an adjancant cell, removes the appropriate wall, and returns that cell, if no cells are avaliable, return false*/
+	//Marks this cell as walked, chooses an adjancant cell, removes the appropriate wall, and returns that cell, if no cells are avaliable, return false
 	this.chooseNextCell = function(){
 		this.walked = true;
 		
@@ -28,7 +28,7 @@ function cell(posX, posY){
 		} else{
 			var chosenCell = possibilities[Math.floor(Math.random() * possibilities.length)]
 			
-			/*Remove appropriate wall*/
+			//Remove appropriate wall
 			if(chosenCell.posY == this.posY){
 				if(chosenCell.posX<this.posX)
 					chosenCell.wallRight = false;
@@ -58,10 +58,10 @@ function backTrace(){
 }
 
 function genMaze(sizeX, sizeY){
-	GRIDSIZEX = sizeX; /*X dimension of the maze*/
-	GRIDSIZEY = sizeY; /*Y dimension of the mase*/
+	GRIDSIZEX = sizeX; //X dimension of the maze
+	GRIDSIZEY = sizeY; //Y dimension of the mase
 
-	/*Generate grid*/
+	//Generate grid
 	grid = [];
 	for(var y=0;y<GRIDSIZEY;y++){
 		grid.push([]);
@@ -75,10 +75,10 @@ function genMaze(sizeX, sizeY){
 	currCell = startPoint;
 	while(true){
 		nextCell = currCell.chooseNextCell();
-		if(nextCell){ /*If nextCell exists, push currentCell on to the log and make currCell = nextCell*/
+		if(nextCell){ //If nextCell exists, push currentCell on to the log and make currCell = nextCell
 			log.push(currCell);
 			currCell = nextCell;
-		}else{ /*If there is nowhere to go, backtrace until there is a way to continue*/
+		}else{ //If there is nowhere to go, backtrace until there is a way to continue
 			if(! backTrace()){
 				break;
 			}
