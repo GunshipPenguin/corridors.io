@@ -1,0 +1,30 @@
+{
+  "name": "mazegame",
+  "version": "1.0.0",
+  "description": "Maze game made with Three.js",
+  "scripts": {
+    "test": "echo test",
+    "lint": "./node_modules/.bin/eslint js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gunshippenguin/mazegame.git"
+  },
+  "keywords": [
+    "Maze",
+    "Game",
+    "3d"
+  ],
+  "author": "GunshipPenguin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gunshippenguin/mazegame/issues"
+  },
+  "homepage": "https://github.com/gunshippenguin/mazegame#readme",
+  "devDependencies": {
+    "eslint": "^3.1.1",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-promise": "^2.0.0",
+    "eslint-plugin-standard": "^2.0.0"
+  }
+}
