@@ -1,3 +1,5 @@
+var THREE = require('three')
+
 var mazeControls = function (camera) {
   this.moveSpeed = 4000
   this.slowDownSpeed = 10
@@ -153,3 +155,5 @@ var mazeControls = function (camera) {
     prevTime = time
   }
 }
+
+module.exports = mazeControls

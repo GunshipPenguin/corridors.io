@@ -1,3 +1,7 @@
+var THREE = require('three')
+var mazeGen = require('./mazegen')
+var mazeControls = require('./mazecontrols')
+
 // Constants
 MAZESIZEX = 20 // X dimension of the generated maze (Number of cells)
 MAZESIZEY = 20 // Y dimension of the generated maze (Number of cells)
@@ -5,14 +9,14 @@ CELLSIZE = 200 // Size of each cell
 WALLWIDTH = 0.1 // 1 is whole cell, 0 is nothing
 WALLHEIGHT = 1 // Relative to CELLSIZE
 
-function newCell (cell) {
+function newCell (cell, posX, posY) {
   // Add in right and bottom walls
   if (cell.wallRight) {
-    if (cell.posX !== MAZESIZEX - 1 || cell.posY !== MAZESIZEY - 1) { // Leave an exit in the bottom right hand corner
+    if (posX !== MAZESIZEX - 1 || posY !== MAZESIZEY - 1) { // Leave an exit in the bottom right hand corner
       var wallGeometry = new THREE.BoxGeometry(WALLWIDTH * CELLSIZE, WALLHEIGHT * CELLSIZE, CELLSIZE)
 
       var wallMatrix = new THREE.Matrix4()
-      wallMatrix.setPosition(new THREE.Vector3(cell.posX * CELLSIZE + CELLSIZE / 2, 0, cell.posY * CELLSIZE))
+      wallMatrix.setPosition(new THREE.Vector3(posX * CELLSIZE + CELLSIZE / 2, 0, posY * CELLSIZE))
       wallGeometry.applyMatrix(wallMatrix)
 
       mazeGeometry.merge(wallGeometry)
@@ -22,27 +26,27 @@ function newCell (cell) {
     var wallGeometry = new THREE.BoxGeometry(CELLSIZE, WALLHEIGHT * CELLSIZE, WALLWIDTH * CELLSIZE)
 
     var wallMatrix = new THREE.Matrix4()
-    wallMatrix.setPosition(new THREE.Vector3(cell.posX * CELLSIZE, 0, cell.posY * CELLSIZE + CELLSIZE / 2))
+    wallMatrix.setPosition(new THREE.Vector3(posX * CELLSIZE, 0, posY * CELLSIZE + CELLSIZE / 2))
     wallGeometry.applyMatrix(wallMatrix)
 
     mazeGeometry.merge(wallGeometry)
   }
 
   // Add in top and left walls
-  if (cell.posY === 0) { // Top wall
+  if (posY === 0) { // Top wall
     var wallGeometry = new THREE.BoxGeometry(CELLSIZE, WALLHEIGHT * CELLSIZE, WALLWIDTH * CELLSIZE)
 
     var wallMatrix = new THREE.Matrix4()
-    wallMatrix.setPosition(new THREE.Vector3(cell.posX * CELLSIZE, 0, cell.posY * CELLSIZE - CELLSIZE / 2))
+    wallMatrix.setPosition(new THREE.Vector3(posX * CELLSIZE, 0, posY * CELLSIZE - CELLSIZE / 2))
     wallGeometry.applyMatrix(wallMatrix)
 
     mazeGeometry.merge(wallGeometry)
   }
-  if (cell.posX === 0) { // Left wall
+  if (posX === 0) { // Left wall
     var wallGeometry = new THREE.BoxGeometry(WALLWIDTH * CELLSIZE, WALLHEIGHT * CELLSIZE, CELLSIZE)
 
     var wallMatrix = new THREE.Matrix4()
-    wallMatrix.setPosition(new THREE.Vector3(cell.posX * CELLSIZE - CELLSIZE / 2, 0, cell.posY * CELLSIZE))
+    wallMatrix.setPosition(new THREE.Vector3(posX * CELLSIZE - CELLSIZE / 2, 0, posY * CELLSIZE))
     wallGeometry.applyMatrix(wallMatrix)
 
     mazeGeometry.merge(wallGeometry)
@@ -93,10 +97,10 @@ scene.add(plane)
 mazeGeometry = new THREE.Geometry()
 
 // Create all cells
-var maze = genMaze(MAZESIZEX, MAZESIZEY)
+var maze = mazeGen.randomDfs(MAZESIZEX, MAZESIZEY)
 for (var y = 0; y < MAZESIZEY; y++) {
   for (var x = 0; x < MAZESIZEX; x++) {
-    newCell(maze[y][x])
+    newCell(maze.getCell(x, y), x, y)
   }
 }
 
