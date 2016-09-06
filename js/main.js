@@ -1,7 +1,7 @@
 var THREE = require('three')
-var mazeGen = require('./mazegen')
-var mazeControls = require('./mazecontrols')
-var meshGenerator = require('./meshgenerator')
+var mazeGenerators = require('./maze-generators')
+var mazeControls = require('./maze-controls')
+var meshGenerator = require('./mesh-generator')
 
 // Constants
 var MAZESIZEX = 20 // X dimension of the generated maze (Number of cells)
@@ -28,7 +28,7 @@ var renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
-var maze = mazeGen.randomDfs(MAZESIZEX, MAZESIZEY)
+var maze = mazeGenerators.randomDfs(MAZESIZEX, MAZESIZEY)
 
 var wallMesh = meshGenerator.getWallMesh(maze)
 scene.add(wallMesh)
