@@ -4,7 +4,6 @@ var THREE = require('three')
 // Mesh generation constants
 var CELLSIZE = 5 // Size of each cell
 var WALLWIDTH = 0.1 // 1 is whole cell, 0 is nothing
-var WALLHEIGHT = 1 // Relative to CELLSIZE
 
 var textureLoader = new THREE.TextureLoader()
 
@@ -71,28 +70,28 @@ mazeRenderer.getFloorMesh = function (maze) {
 }
 
 function getRightWallGeometry (x, y) {
-  var wallGeometry = new THREE.BoxGeometry(WALLWIDTH * CELLSIZE, WALLHEIGHT * CELLSIZE, CELLSIZE)
+  var wallGeometry = new THREE.BoxGeometry(WALLWIDTH * CELLSIZE, CELLSIZE, CELLSIZE)
   var matrix = new THREE.Matrix4().setPosition(new THREE.Vector3(x * CELLSIZE + CELLSIZE / 2, 0, y * CELLSIZE))
   wallGeometry.applyMatrix(matrix)
   return wallGeometry
 }
 
 function getLeftWallGeometry (x, y) {
-  var wallGeometry = new THREE.BoxGeometry(WALLWIDTH * CELLSIZE, WALLHEIGHT * CELLSIZE, CELLSIZE)
+  var wallGeometry = new THREE.BoxGeometry(WALLWIDTH * CELLSIZE, CELLSIZE, CELLSIZE)
   var matrix = new THREE.Matrix4().setPosition(new THREE.Vector3(x * CELLSIZE - CELLSIZE / 2, 0, y * CELLSIZE))
   wallGeometry.applyMatrix(matrix)
   return wallGeometry
 }
 
 function getTopWallGeometry (x, y) {
-  var wallGeometry = new THREE.BoxGeometry(CELLSIZE, WALLHEIGHT * CELLSIZE, WALLWIDTH * CELLSIZE)
+  var wallGeometry = new THREE.BoxGeometry(CELLSIZE, CELLSIZE, WALLWIDTH * CELLSIZE)
   var matrix = new THREE.Matrix4().setPosition(new THREE.Vector3(x * CELLSIZE, 0, y * CELLSIZE - CELLSIZE / 2))
   wallGeometry.applyMatrix(matrix)
   return wallGeometry
 }
 
 function getBottomWallGeometry (x, y) {
-  var wallGeometry = new THREE.BoxGeometry(CELLSIZE, WALLHEIGHT * CELLSIZE, WALLWIDTH * CELLSIZE)
+  var wallGeometry = new THREE.BoxGeometry(CELLSIZE,  CELLSIZE, WALLWIDTH * CELLSIZE)
   var matrix = new THREE.Matrix4().setPosition(new THREE.Vector3(x * CELLSIZE, 0, y * CELLSIZE + CELLSIZE / 2))
   wallGeometry.applyMatrix(matrix)
   return wallGeometry
