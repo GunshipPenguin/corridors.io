@@ -6,7 +6,10 @@ var CELLSIZE = 200 // Size of each cell
 var WALLWIDTH = 0.1 // 1 is whole cell, 0 is nothing
 var WALLHEIGHT = 1 // Relative to CELLSIZE
 
+var textureLoader = new THREE.TextureLoader()
+
 var mazeRenderer = {}
+
 mazeRenderer.getWallMesh = function (maze) {
   var wallGeometry = new THREE.Geometry()
 
@@ -35,13 +38,13 @@ mazeRenderer.getWallMesh = function (maze) {
     }
   }
 
-  var wallMaterial = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture('images/brick.jpg')})
+  var wallMaterial = new THREE.MeshLambertMaterial({map: textureLoader.load('images/brick.jpg')})
   return new THREE.Mesh(wallGeometry, wallMaterial)
 }
 
 mazeRenderer.getCeilingMesh = function (maze) {
   var geometry = new THREE.PlaneGeometry(maze.getX() * CELLSIZE, maze.getY() * CELLSIZE)
-  var gmap = THREE.ImageUtils.loadTexture('images/rock.jpg')
+  var gmap = textureLoader.load('images/rock.jpg')
   gmap.wrapS = THREE.RepeatWrapping
   gmap.wrapT = THREE.RepeatWrapping
   gmap.repeat.x = 20 / 20 * maze.getX()
@@ -55,7 +58,7 @@ mazeRenderer.getCeilingMesh = function (maze) {
 
 mazeRenderer.getFloorMesh = function (maze) {
   var geometry = new THREE.PlaneGeometry(maze.getX() * CELLSIZE, maze.getY() * CELLSIZE)
-  var gmap = THREE.ImageUtils.loadTexture('images/metal.jpg')
+  var gmap = textureLoader.load('images/metal.jpg')
   gmap.wrapS = THREE.RepeatWrapping
   gmap.wrapT = THREE.RepeatWrapping
   gmap.repeat.x = 70 / 20 * maze.getX()
