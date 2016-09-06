@@ -2,7 +2,7 @@
 var THREE = require('three')
 
 // Mesh generation constants
-var CELLSIZE = 200 // Size of each cell
+var CELLSIZE = 5 // Size of each cell
 var WALLWIDTH = 0.1 // 1 is whole cell, 0 is nothing
 var WALLHEIGHT = 1 // Relative to CELLSIZE
 

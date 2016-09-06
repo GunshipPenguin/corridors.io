@@ -1,8 +1,8 @@
 var THREE = require('three')
 
 var mazeControls = function (camera) {
-  this.moveSpeed = 4000
-  this.slowDownSpeed = 10
+  this.moveSpeed = 50
+  this.slowDownSpeed = 5
 
   this.collidableMesh = null
 
