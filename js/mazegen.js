@@ -1,26 +1,6 @@
 'use strict'
 var _ = require('underscore')
-
-var Cell = function () {
-  this.wallRight = true
-  this.wallBottom = true
-}
-
-var Maze = function (sizeX, sizeY) {
-  var self = this
-  this.grid = []
-
-  for (var y = 0; y < sizeY; y++) {
-    this.grid.push([])
-    for (var x = 0; x < sizeX; x++) {
-      this.grid[y].push(new Cell())
-    }
-  }
-
-  this.getCell = function (x, y) {
-    return self.grid[y][x]
-  }
-}
+var Maze = require('./maze')
 
 var mazeGen = {}
 
@@ -32,8 +12,8 @@ mazeGen.randomDfs = function (sizeX, sizeY) {
     var index = _.findLastIndex(log, function (position) {
       return getRandomAdjacentPosition(position) !== null
     })
-    
-    index = index === -1 ? 0 : index + 1;
+
+    index = index === -1 ? 0 : index + 1
     log = log.slice(0, index)
   }
 
@@ -53,7 +33,7 @@ mazeGen.randomDfs = function (sizeX, sizeY) {
     }
 
     possiblePositions = possiblePositions.filter(function (position) {
-      return ! maze.getCell(position.x, position.y).walked
+      return !maze.getCell(position.x, position.y).walked
     })
     return possiblePositions.length === 0 ? null : possiblePositions[_.random(possiblePositions.length - 1)]
   }
@@ -80,16 +60,15 @@ mazeGen.randomDfs = function (sizeX, sizeY) {
         maze.getCell(lastPosition.x, lastPosition.y).wallBottom = false
       }
     }
-    
+
     // Append position to log
     log.push(nextPosition)
     maze.getCell(nextPosition.x, nextPosition.y).walked = true
-    
+
     return true
   }
 
   var start = {x: _.random(sizeX - 1), y: _.random(sizeY - 1)}
-  console.log(start)
   maze.getCell(start.x, start.y).walked = true
   log.push(start)
   while (log.length > 0) {
