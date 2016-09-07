@@ -1,7 +1,7 @@
 'use strict'
 var THREE = require('three')
 var mazeGenerators = require('./maze-generators')
-var mazeControls = require('./maze-controls')
+var MazeControls = require('./maze-controls')
 var meshGenerator = require('./mesh-generator')
 
 // Constants
@@ -42,7 +42,7 @@ scene.add(floorMesh)
 
 scene.add(new THREE.AmbientLight(0x676767))
 
-var controls = new mazeControls(camera)
+var controls = new MazeControls(camera)
 controls.collidableMesh = wallMesh
 scene.add(controls.getObject())
 

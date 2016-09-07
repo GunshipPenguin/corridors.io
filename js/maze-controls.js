@@ -1,7 +1,7 @@
 'use strict'
 var THREE = require('three')
 
-var mazeControls = function (camera) {
+var MazeControls = function (camera) {
   this.moveSpeed = 50
   this.slowDownSpeed = 5
 
@@ -157,4 +157,4 @@ var mazeControls = function (camera) {
   }
 }
 
-module.exports = mazeControls
+module.exports = MazeControls
