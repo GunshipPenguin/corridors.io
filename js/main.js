@@ -1,3 +1,4 @@
+'use strict'
 var THREE = require('three')
 var mazeGenerators = require('./maze-generators')
 var mazeControls = require('./maze-controls')
