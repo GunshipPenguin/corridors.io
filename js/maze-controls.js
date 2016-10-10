@@ -33,7 +33,7 @@ var MazeControls = function (camera) {
     return yawObject
   }
 
-  document.addEventListener('click', function (event) {
+	var obtainPointerLock = function (event) {
     var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document
     if (havePointerLock) {
       var element = document.body
@@ -66,7 +66,9 @@ var MazeControls = function (camera) {
     } else {
       window.alert('Your browser does not seem to support the pointerlock API')
     }
-  }, false)
+  }
+
+  document.addEventListener('click', obtainPointerLock, false)
 
   var onMouseMove = function (event) {
     var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0
