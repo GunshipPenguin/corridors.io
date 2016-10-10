@@ -16,11 +16,13 @@ var MazeControls = function (camera) {
 
   this.collidableMesh = null
 
-  // Internals
-  var moveForward = false
-  var moveBackward = false
-  var moveLeft = false
-  var moveRight = false
+  // Object representing current movement
+  var movement = {
+    forward: false,
+    backward: false,
+    left: false,
+    right: false
+  }
   var velocity = new THREE.Vector3()
 
   var prevTime = performance.now()
@@ -76,22 +78,22 @@ var MazeControls = function (camera) {
     switch (event.keyCode) {
       case 38: // up
       case 87: // w
-        moveForward = true
+        movement.forward = true
         break
 
       case 37: // left
       case 65: // a
-        moveLeft = true
+        movement.left = true
         break
 
       case 40: // down
       case 83: // s
-        moveBackward = true
+        movement.backward = true
         break
 
       case 39: // right
       case 68: // d
-        moveRight = true
+        movement.right = true
         break
     }
   }
@@ -100,22 +102,22 @@ var MazeControls = function (camera) {
     switch (event.keyCode) {
       case 38: // up
       case 87: // w
-        moveForward = false
+        movement.forward = false
         break
 
       case 37: // left
       case 65: // a
-        moveLeft = false
+        movement.left = false
         break
 
       case 40: // down
       case 83: // s
-        moveBackward = false
+        movement.backward = false
         break
 
       case 39: // right
       case 68: // d
-        moveRight = false
+        movement.right = false
         break
     }
   }
@@ -140,16 +142,16 @@ var MazeControls = function (camera) {
     velocity.x -= velocity.x * slowDownSpeed * delta
     velocity.z -= velocity.z * slowDownSpeed * delta
 
-    if (moveForward) {
+    if (movement.forward) {
       velocity.z -= moveSpeed * delta
     }
-    if (moveBackward) {
+    if (movement.backward) {
       velocity.z += moveSpeed * delta
     }
-    if (moveLeft) {
+    if (movement.left) {
       velocity.x -= moveSpeed * delta
     }
-    if (moveRight) {
+    if (movement.right) {
       velocity.x += moveSpeed * delta
     }
 
