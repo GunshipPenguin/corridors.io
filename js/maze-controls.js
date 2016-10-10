@@ -1,9 +1,18 @@
 'use strict'
 var THREE = require('three')
+var DEFAULT_MOVE_SPEED = 50
+var DEFAULT_SLOW_DOWN_SPEED = 5
 
 var MazeControls = function (camera) {
-  this.moveSpeed = 50
-  this.slowDownSpeed = 5
+  var moveSpeed = DEFAULT_MOVE_SPEED
+  this.setMoveSpeed = function (newMoveSpeed) {
+    moveSpeed = newMoveSpeed
+  }
+
+  var slowDownSpeed = DEFAULT_SLOW_DOWN_SPEED
+  this.setSlowDownSpeed = function (newSlowDownSpeed) {
+    slowDownSpeed = newSlowDownSpeed
+  }
 
   this.collidableMesh = null
 
@@ -18,6 +27,9 @@ var MazeControls = function (camera) {
 
   var yawObject = new THREE.Object3D()
   yawObject.add(camera)
+  this.getObject = function () {
+    return yawObject
+  }
 
   document.addEventListener('click', function (event) {
     var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document
@@ -111,10 +123,6 @@ var MazeControls = function (camera) {
   document.addEventListener('keydown', onKeyDown, false)
   document.addEventListener('keyup', onKeyUp, false)
 
-  this.getObject = function () {
-    return yawObject
-  }
-
   this.checkCollision = function (movementVector) {
     if (this.collidableMesh) {
       var ray = new THREE.Raycaster(yawObject.position, movementVector.clone().normalize(), 0, movementVector.length() * 3)
@@ -129,20 +137,20 @@ var MazeControls = function (camera) {
     var time = performance.now()
     var delta = (time - prevTime) / 1000
 
-    velocity.x -= velocity.x * this.slowDownSpeed * delta
-    velocity.z -= velocity.z * this.slowDownSpeed * delta
+    velocity.x -= velocity.x * slowDownSpeed * delta
+    velocity.z -= velocity.z * slowDownSpeed * delta
 
     if (moveForward) {
-      velocity.z -= this.moveSpeed * delta
+      velocity.z -= moveSpeed * delta
     }
     if (moveBackward) {
-      velocity.z += this.moveSpeed * delta
+      velocity.z += moveSpeed * delta
     }
     if (moveLeft) {
-      velocity.x -= this.moveSpeed * delta
+      velocity.x -= moveSpeed * delta
     }
     if (moveRight) {
-      velocity.x += this.moveSpeed * delta
+      velocity.x += moveSpeed * delta
     }
 
     var deltaVec = velocity.clone()
