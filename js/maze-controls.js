@@ -25,7 +25,7 @@ var MazeControls = function (camera) {
   }
   var velocity = new THREE.Vector3()
 
-  var prevTime = performance.now()
+  var prevTime = window.performance.now()
 
   var yawObject = new THREE.Object3D()
   yawObject.add(camera)
@@ -51,7 +51,7 @@ var MazeControls = function (camera) {
       }
 
       var pointerLockError = function (event) {
-        alert('There was an error with pointerlock')
+        window.alert('There was an error with pointerlock')
       }
 
       // Hook pointer lock state change events
@@ -64,7 +64,7 @@ var MazeControls = function (camera) {
       document.addEventListener('mozpointerlockerror', pointerLockError, false)
       document.addEventListener('webkitpointerlockerror', pointerLockError, false)
     } else {
-      alert('Your browser does not seem to support the pointerlock API')
+      window.alert('Your browser does not seem to support the pointerlock API')
     }
   }, false)
 
@@ -136,7 +136,7 @@ var MazeControls = function (camera) {
   }
 
   this.update = function () {
-    var time = performance.now()
+    var time = window.performance.now()
     var delta = (time - prevTime) / 1000
 
     velocity.x -= velocity.x * slowDownSpeed * delta
