@@ -43,7 +43,7 @@ scene.add(floorMesh)
 scene.add(new THREE.AmbientLight(0x676767))
 
 var controls = new MazeControls(camera)
-controls.collidableMesh = wallMesh
+controls.setCollidableMesh(wallMesh)
 scene.add(controls.getObject())
 
 window.addEventListener('resize', onWindowResize, false)

@@ -14,7 +14,11 @@ var MazeControls = function (camera) {
     slowDownSpeed = newSlowDownSpeed
   }
 
-  this.collidableMesh = null
+	// Mesh that controls cannot pass through
+  var collidableMesh = null
+	this.setCollidableMesh = function(newCollidableMesh) {
+		collidableMesh = newCollidableMesh
+	}
 
   // Object representing current movement
   var movement = {
@@ -128,9 +132,9 @@ var MazeControls = function (camera) {
   document.addEventListener('keyup', onKeyUp, false)
 
   this.checkCollision = function (movementVector) {
-    if (this.collidableMesh) {
+    if (collidableMesh) {
       var ray = new THREE.Raycaster(yawObject.position, movementVector.clone().normalize(), 0, movementVector.length() * 3)
-      var collisions = ray.intersectObject(this.collidableMesh)
+      var collisions = ray.intersectObject(collidableMesh)
       return (collisions.length > 0 && collisions[0].distance < movementVector.length())
     } else {
       return false
