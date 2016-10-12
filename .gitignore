@@ -1,4 +1,4 @@
 node_modules
 npm-debug.log
 .project
-game.js
+public_html/game.js

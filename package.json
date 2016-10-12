@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo test",
     "lint": "./node_modules/.bin/eslint js",
-    "bundle": "./node_modules/.bin/browserify js/main.js > game.js"
+    "bundle": "./node_modules/.bin/browserify js/main.js > public_html/game.js"
   },
   "repository": {
     "type": "git",
