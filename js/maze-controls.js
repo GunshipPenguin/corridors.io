@@ -131,7 +131,7 @@ var MazeControls = function (camera) {
   document.addEventListener('keydown', onKeyDown, false)
   document.addEventListener('keyup', onKeyUp, false)
 
-  this.checkCollision = function (movementVector) {
+  var checkCollision = function (movementVector) {
     if (collidableMesh) {
       var ray = new THREE.Raycaster(yawObject.position, movementVector.clone().normalize(), 0, movementVector.length() * 3)
       var collisions = ray.intersectObject(collidableMesh)
@@ -165,7 +165,7 @@ var MazeControls = function (camera) {
     deltaVec.applyEuler(yawObject.rotation)
     deltaVec.multiplyScalar(delta)
 
-    if (!this.checkCollision(deltaVec)) {
+    if (!checkCollision(deltaVec)) {
       yawObject.translateZ(velocity.z * delta)
       yawObject.translateX(velocity.x * delta)
     }
