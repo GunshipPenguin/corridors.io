@@ -16,9 +16,9 @@ var MazeControls = function (camera) {
 
 	// Mesh that controls cannot pass through
   var collidableMesh = null
-	this.setCollidableMesh = function(newCollidableMesh) {
-		collidableMesh = newCollidableMesh
-	}
+  this.setCollidableMesh = function (newCollidableMesh) {
+    collidableMesh = newCollidableMesh
+  }
 
   // Object representing current movement
   var movement = {
@@ -37,7 +37,7 @@ var MazeControls = function (camera) {
     return yawObject
   }
 
-	var obtainPointerLock = function (event) {
+  var obtainPointerLock = function (event) {
     var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document
     if (havePointerLock) {
       var element = document.body
