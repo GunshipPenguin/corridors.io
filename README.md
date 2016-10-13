@@ -11,10 +11,17 @@ Generates a maze using a randomized depth first search algorithm and turns it in
 
 Ensure that you have npm installed and run: 
 
-`npm install && npm run bundle`
+`npm install`
 
-This will bundle all the js and put it in `public_html/game.js`, after you have that file, just open `public_html/index.html` in a web browser.
+Then run:
 
+`npm run build-dev`
+
+This will bundle all the js and put it in `public_html/game.js`. After you have game.js, just open `public_html/index.html` in a web browser.
+
+To bundle all the js and minify it, run:
+
+`npm run build-release`
 
 ## Style
 This project uses the JS standard code style.
