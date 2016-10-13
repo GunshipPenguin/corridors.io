@@ -1,5 +1,6 @@
 # Corridors.io
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+[![Website](https://img.shields.io/website-up-down-green-red/https/corridors.io.svg?maxAge=2592000)](https://corridors.io)
 
 Generates a maze using a randomized depth first search algorithm and turns it into a 3d maze using three.js. The user is placed in the upper left hand corner of the maze and must try to find his/her way to the bottom right hand corner of the maze, which is marked by a hole in the wall.
 
