@@ -1,5 +1,7 @@
 'use strict'
 var THREE = require('three')
+var controlsUtils = require('./controls-utils')
+
 var DEFAULT_MOVE_SPEED = 50
 var DEFAULT_SLOW_DOWN_SPEED = 5
 
@@ -37,42 +39,28 @@ var MazeControls = function (camera) {
     return yawObject
   }
 
-  var obtainPointerLock = function (event) {
-    var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document
-    if (havePointerLock) {
-      var element = document.body
-      element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock
-      element.requestPointerLock()
-
-      var pointerLockChange = function () {
-        if (document.pointerLockElement === document.body || document.mozPointerLockElement === document.body || document.webkitPointerLockElement === document.body) {
-          // Pointer was locked, hook mousemove events
-          document.addEventListener('mousemove', onMouseMove, false)
-        } else {
-          // Pointer was unlocked, unhook mousemove events
-          document.removeEventListener('mousemove', onMouseMove, false)
-        }
-      }
-
-      var pointerLockError = function (event) {
-        window.alert('There was an error with pointerlock')
-      }
-
-      // Hook pointer lock state change events
-      document.addEventListener('pointerlockchange', pointerLockChange, false)
-      document.addEventListener('mozpointerlockchange', pointerLockChange, false)
-      document.addEventListener('webkitpointerlockchange', pointerLockChange, false)
-
-      // Hook pointer lock error events
-      document.addEventListener('pointerlockerror', pointerLockError, false)
-      document.addEventListener('mozpointerlockerror', pointerLockError, false)
-      document.addEventListener('webkitpointerlockerror', pointerLockError, false)
+  var pointerLockChange = function () {
+    if (controlsUtils.hasPointerLock(document.body)) {
+      // Pointer was locked, hook mousemove events
+      document.addEventListener('mousemove', onMouseMove, false)
     } else {
-      window.alert('Your browser does not seem to support the pointerlock API')
+      // Pointer was unlocked, unhook mousemove events
+      document.removeEventListener('mousemove', onMouseMove, false)
     }
   }
 
-  document.addEventListener('click', obtainPointerLock, false)
+  var pointerLockError = function () {
+    window.alert('There was an error with pointer lock')
+  }
+
+  document.addEventListener('click', function () {
+    if (controlsUtils.obtainPointerLock(document.body)) {
+      controlsUtils.setPointerLockChange(pointerLockChange)
+      controlsUtils.setPointerLockError(pointerLockError)
+    } else {
+      window.alert('Your browser does not seem to support the pointer lock API')
+    }
+  }, false)
 
   var onMouseMove = function (event) {
     var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0
