@@ -4,7 +4,7 @@
   "description": "Maze game made with Three.js",
   "scripts": {
     "lint": "eslint js || exit 0",
-    "doc": "jsdoc --readme README.md js || exit 0",
+    "doc": "jsdoc --readme README.md -d doc js || exit 0",
     "build-dev": "browserify js/main.js > public_html/game.js || exit 0",
     "build-release": "browserify js/main.js | uglifyjs > public_html/game.js || exit 0"
   },
