@@ -4,6 +4,7 @@
   "description": "Maze game made with Three.js",
   "scripts": {
     "lint": "eslint js || exit 0",
+    "doc": "jsdoc --readme README.md js || exit 0",
     "build-dev": "browserify js/main.js > public_html/game.js || exit 0",
     "build-release": "browserify js/main.js | uglifyjs > public_html/game.js || exit 0"
   },
@@ -27,6 +28,7 @@
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-standard": "^2.0.0",
+    "jsdoc": "^3.4.3",
     "uglify-js": "^2.7.3"
   },
   "dependencies": {
