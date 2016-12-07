@@ -2,8 +2,15 @@
 var _ = require('underscore')
 
 /**
- * Represents a cell in a maze. Each cell has a bottom and a right wall, both
- * of which will be up by default.
+ * Represents a cell in a maze. Each cell has a bottom and a right wall.
+ * @typedef Cell
+ * @type {Object}
+ * @property {Boolean} wallRight If the right wall is present
+ * @property {Boolean} wallBottom If the bottom wall is present
+ */
+
+/**
+ * Construct a new Cell with its bottom and right wall up.
  *
  * @constructor
  */
@@ -13,9 +20,14 @@ var Cell = function () {
 }
 
 /**
- * Represents an entire maze. When called, creates the maze with the specified
- * size and fills it with cells all of which have their right and bottom
- * wall up.
+ * Represents a Maze
+ * @typedef Maze
+ * @type {Object}
+ */
+
+/**
+ * Creates a new Maze with the specified size and fill it with cells all of
+ * which have their right and bottom wall up.
  *
  * @constructor
  * @param {Number} sizeX X dimension of the maze
