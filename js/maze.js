@@ -52,7 +52,7 @@ var Maze = function (sizeX, sizeY) {
  *
  * @param  {type} wallState State to set walls to
  */
-Maze.prototype.setAllWalls = function(wallState) {
+Maze.prototype.setAllWalls = function (wallState) {
   for (var y = 0; y < this.getY(); y++) {
     for (var x = 0; x < this.getX(); x++) {
       this._grid[y][x] = {wallRight: wallState, wallBottom: wallState}
@@ -129,10 +129,10 @@ Maze.prototype.setWalls = function (position, walls) {
   this._getCell(position.x, position.y).wallRight = newWalls.right
 
   if (position.y > 0) { // Top
-    this._getCell(position.x, position.y-1).wallBottom = newWalls.top
+    this._getCell(position.x, position.y - 1).wallBottom = newWalls.top
   }
   if (position.x > 0) { // Left
-    this._getCell(position.x-1, position.y).wallRight = newWalls.left
+    this._getCell(position.x - 1, position.y).wallRight = newWalls.left
   }
 }
 
@@ -147,8 +147,8 @@ Maze.prototype.getWalls = function (position) {
 
   walls.right = this._grid[position.y][position.x].wallRight
   walls.bottom = this._grid[position.y][position.x].wallBottom
-  walls.top = position.y > 0 ? this._grid[position.y-1][position.x].wallBottom : true
-  walls.left = position.x > 0 ? this._grid[position.y][position.x-1].wallRight : true
+  walls.top = position.y > 0 ? this._grid[position.y - 1][position.x].wallBottom : true
+  walls.left = position.x > 0 ? this._grid[position.y][position.x - 1].wallRight : true
 
   return walls
 }

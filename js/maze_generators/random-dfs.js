@@ -9,7 +9,7 @@ var _ = require('underscore')
  * @param {type} position Current position to consider
  * @param {type} visited Object containing visited maze cells
  */
-var randomDfs = function (maze, position, visited={}) {
+var randomDfs = function (maze, position, visited = {}) {
   visited[getPositionString(position)] = true
 
   var positions = _.shuffle(maze.getAdjacentPositionsTo(position))
@@ -28,7 +28,7 @@ var randomDfs = function (maze, position, visited={}) {
  * @param {Position} position description
  * @return {String} A string representing position
  */
-var getPositionString = function(position) {
+var getPositionString = function (position) {
   return position.x.toString() + ',' + position.y.toString()
 }
 

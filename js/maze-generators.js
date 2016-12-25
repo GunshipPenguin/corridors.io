@@ -17,7 +17,7 @@ var mazeGen = {}
  * @param  {Number} sizeY Y size of the maze to generate
  * @return {Maze} A new maze to
  */
-mazeGen.randomDfs = function(sizeX, sizeY) {
+mazeGen.randomDfs = function (sizeX, sizeY) {
   var maze = new Maze(sizeX, sizeY)
   maze.setAllWalls(true)
 
