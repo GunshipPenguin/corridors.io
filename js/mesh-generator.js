@@ -12,18 +12,20 @@ var mazeRenderer = {}
 mazeRenderer.getWallMesh = function (maze) {
   var wallGeometry = new THREE.Geometry()
 
+  var currWalls
+
   for (var y = 0; y < maze.getY(); y++) {
     for (var x = 0; x < maze.getX(); x++) {
-      var currCell = maze.getCell(x, y)
+      currWalls = maze.getWalls({x: x, y: y})
 
       // Add right wall
-      if (currCell.wallRight) {
+      if (currWalls.right) {
         if (x !== maze.getX() - 1 || y !== maze.getY() - 1) { // Leave an exit in the bottom right hand corner
           wallGeometry.merge(getRightWallGeometry(x, y))
         }
       }
       // Add bottom wall
-      if (currCell.wallBottom) {
+      if (currWalls.bottom) {
         wallGeometry.merge(getBottomWallGeometry(x, y))
       }
       // Add top wall
