@@ -25,6 +25,12 @@ To bundle all the js and minify it, run:
 
 `npm run build-release`
 
+## Tests
+
+Jasmine unit tests are located in the `spec` directory. To run them, use:
+
+`npm test`
+
 ## Documentation
 
 This project uses [JSDoc](http://usejsdoc.org/).
@@ -45,9 +51,7 @@ To run eslint, use:
 ## License
 All code licensed under the MIT license (See LICENSE file). All images licensed under CC0 / Public domain.
 
-
 ## Todo
 * Add more maze generators
 * Add a page allowing the user to select a maze generator / maze size
 * Document everything
-* Add tests
