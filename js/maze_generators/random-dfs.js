@@ -10,7 +10,7 @@ var _ = require('underscore')
  * @param {type} visited Object containing visited maze cells
  */
 var randomDfs = function (maze, position, visited) {
-  visited = typeof visited !== undefined ? visited : {}
+  visited = typeof visited !== 'undefined' ? visited : {}
 
   visited[getPositionString(position)] = true
 
